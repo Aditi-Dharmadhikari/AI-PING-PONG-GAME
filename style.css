@@ -18,3 +18,19 @@
 #start , #status{
     font-size: 18px;
 }
+
+.img1{
+    display: inline;
+    width: 45%;
+}
+
+.modal-dialog{
+    width: 90%;
+}
+
+#footer{
+    
+    margin: 0px;
+    line-height: 2px;
+    background-color: white;
+}

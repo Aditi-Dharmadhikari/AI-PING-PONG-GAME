@@ -15,6 +15,8 @@ var pcscore =0;
 
 scoreright = 0;
 
+status = "";
+
 rightWristX = 0;
 rightWristY = 0;
 //ball x and y and speedx speed y and radius
@@ -64,12 +66,6 @@ function draw(){
 
  
  
-
- if(scorerightwrist>0.2){
- circle(rightWristX, rightWristY, 20);
- stroke("#43c4f7");
- fill("#43c4f7");
- }
 
  
    //funtion paddleInCanvas call 
@@ -213,4 +209,19 @@ function setup() {
 
 function model_loaded(){
   console.log("model loaded!!!!!:)");
+}
+
+
+function start()
+{
+ status = "start";
+  document.getElementById("status").innerHTML = "Game has loaded";
+
+  
+ if(scorerightwrist>0.2){
+  circle(rightWristX, rightWristY, 20);
+  stroke("#43c4f7");
+  fill("#43c4f7");
+  }
+ 
 }

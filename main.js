@@ -7,7 +7,7 @@ var paddle1X = 10,paddle1Height = 110;
 var paddle2Y = 685,paddle2Height = 70;
 
 var score1 = 0, score2 =0;
-var paddle1Y;
+var mouseY;
 
 var  playerscore =0;
 var audio1;
@@ -28,10 +28,20 @@ var ball = {
     dy:3
 }
 
+function preload(){
+  missed=loadSound("missed.wav")
+  ball_touch=loadSound("ball_touch_paddel.wav")
+}
+
 function setup(){
   var canvas =  createCanvas(700,600);
 }
 
+function start(){
+  pcscore=0;
+  playerscore=0;
+  loop();
+}
 
 function gotPose(results){
   if(results.length > 0){
@@ -75,8 +85,8 @@ function draw(){
    fill(250,0,0);
     stroke(0,0,250);
     strokeWeight(0.5);
-   paddle1Y = mouseY; 
-   rect(paddle1X,paddle1Y,paddle1,paddle1Height,100);
+   mouseY = mouseY; 
+   rect(paddle1X,mouseY,paddle1,paddle1Height,100);
    
    
     //pc computer paddle
@@ -106,7 +116,9 @@ function reset(){
    ball.dx=3;
    ball.dy =3;
    
-}
+
+
+  }
 
 
 //function midline draw a line in center
@@ -145,13 +157,15 @@ function move(){
        ball.dx=-ball.dx-0.5;       
    }
   if (ball.x-2.5*ball.r/2< 0){
-  if (ball.y >= paddle1Y&& ball.y <= paddle1Y + paddle1Height) {
+  if (ball.y >= mouseY&& ball.y <= mouseY + paddle1Height) {
     ball.dx = -ball.dx+0.5; 
+    ball_touch.play();
   }
   else{
     pcscore++;
     reset();
     navigator.vibrate(100);
+    missed.play()
   }
 }
 if(pcscore ==4){
@@ -162,7 +176,7 @@ if(pcscore ==4){
     stroke("white");
     textSize(25)
     text("Game Over!☹☹",width/2,height/2);
-    text("Reload The Page!",width/2,height/2+30)
+    text("Press Play Game button to play again",width/2,height/2+30)
     noLoop();
     pcscore = 0;
 }
